@@ -3,7 +3,7 @@ import Spotify from "../assets/spotify.png";
 import download from "../assets/download.png";
 import Grocery from "../assets/cart.png";
 import Netflix from "../assets/netflix.png";
-// import Amazon from "../assets/amazon.png";
+import Amazon from "../assets/amazon.png";
 import instagram from "../assets/instagram.png";
 import beats from "../assets/beats.png";
 
