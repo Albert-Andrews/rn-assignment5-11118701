@@ -1,23 +1,19 @@
 import {
-  FlatList,
   SafeAreaView,
   StyleSheet,
-  Switch,
   Text,
   View,
   Image,
+  TouchableOpacity,
   useColorScheme,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import Toggle from "../Components/Toggle";
+import { useTheme } from "../Context/ThemeContext";
 
 const Settings = ({ navigation }) => {
-  const scheme = useColorScheme();
-  const styles = scheme === "dark" ? darkStyles : lightStyles;
-
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-
-  const [isEnabled, setIsEnabled] = useState(false);
+  const { isDark } = useTheme();
+  const styles = isDark ? darkStyles : lightStyles;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -70,7 +66,29 @@ const Settings = ({ navigation }) => {
         </View>
 
         {/* Bottom Navigation */}
-        <Text onPress={() => navigation.navigate("Home")}>Home</Text>
+        <View style={styles.bottomNavigation}>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Image style={styles.home} source={require("../assets/home.png")} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Image
+              style={styles.homeIcon}
+              source={require("../assets/myCards.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Image
+              style={styles.homeIcon}
+              source={require("../assets/pie.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+            <Image
+              style={styles.homeIcon}
+              source={require("../assets/settingsActive.png")}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -81,11 +99,12 @@ export default Settings;
 const lightStyles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
   },
   subContainer: {
     padding: 20,
     justifyContent: "space-between",
-    alignItems: "start",
+    alignItems: "flex-start",
     height: "100%",
     gap: 20,
   },
@@ -98,17 +117,19 @@ const lightStyles = StyleSheet.create({
   settingsListContainer: {
     flexDirection: "column",
     justifyContent: "space-between",
-    alignItems: "start",
+    alignItems: "flex-start",
     width: "100%",
     gap: 20,
   },
   text: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "#000",
   },
   text1: {
     fontSize: 15,
     fontWeight: "500",
+    color: "#000",
   },
   settingsList: {
     flexDirection: "row",
@@ -118,10 +139,6 @@ const lightStyles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderColor: "gray",
     padding: 10,
-  },
-  bottomText: {
-    fontSize: 20,
-    fontWeight: "bold",
   },
   settingsTheme: {
     flexDirection: "row",
@@ -133,5 +150,96 @@ const lightStyles = StyleSheet.create({
   settingsIcon: {
     width: 20,
     height: 20,
+  },
+  homeIcon: {
+    height: 25,
+    width: 25,
+  },
+  bottomNavigation: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    padding: 20,
+    top: 28,
+  },
+  home: {
+    height: 30,
+    width: 30,
+    resizeMode: "contain",
+  },
+});
+
+const darkStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#000",
+  },
+  subContainer: {
+    padding: 20,
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    height: "100%",
+    gap: 20,
+  },
+  settingsHeader: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
+  settingsListContainer: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    width: "100%",
+    gap: 20,
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  text1: {
+    fontSize: 15,
+    fontWeight: "500",
+    color: "#fff",
+  },
+  settingsList: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    borderBottomWidth: 0.5,
+    borderColor: "gray",
+    padding: 10,
+  },
+  settingsTheme: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    padding: 10,
+  },
+  settingsIcon: {
+    width: 20,
+    height: 20,
+  },
+  homeIcon: {
+    height: 25,
+    width: 25,
+  },
+  bottomNavigation: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    padding: 20,
+    top: 28,
+  },
+  home: {
+    height: 30,
+    width: 30,
+    resizeMode: "contain",
   },
 });

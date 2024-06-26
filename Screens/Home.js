@@ -5,6 +5,7 @@ import {
   View,
   Image,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import { Transaction } from "../Mock/Transaction";
@@ -21,43 +22,29 @@ const Home = ({ navigation }) => {
               source={require("../assets/profile.png")}
             />
             <View style={styles.profileText}>
-              <Text style={styles.greeting}>Welcome Back</Text>
-              <Text style={styles.name}>Eric Atsu</Text>
+              <Text style={[styles.greeting]}>Welcome Back</Text>
+              <Text style={[styles.name]}>Eric Atsu</Text>
             </View>
           </View>
 
           <View style={styles.search}>
             <Image
-              style={styles.searchIcon}
+              style={[styles.searchIcon]}
               source={require("../assets/icons8-search-480.png")}
             />
           </View>
         </View>
 
         {/* card */}
-        {/* <View style={styles.card}> */}
         <Image
           style={styles.cardImage}
           source={require("../assets/Card.png")}
         />
-        {/* </View> */}
 
         {/* Transfer options */}
         <View style={styles.flatlistContainer}>
-          {/* <FlatList
-            style={styles.flatList}
-            data={Transfer}
-            renderItem={({ item }) => (
-              <View style={styles.flatListChild}>
-                <Image source={item.image} />
-              </View>
-            )}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item) => item.id}
-          /> */}
           <View style={styles.imageMainContainer}>
-            <View style={styles.imageContainer}>
+            <View style={[styles.imageContainer]}>
               <Image
                 style={styles.transferIcon}
                 source={require("../assets/up.png")}
@@ -67,7 +54,7 @@ const Home = ({ navigation }) => {
           </View>
 
           <View style={styles.imageMainContainer}>
-            <View style={styles.imageContainer}>
+            <View style={[styles.imageContainer]}>
               <Image
                 style={styles.transferIcon}
                 source={require("../assets/down.png")}
@@ -76,7 +63,7 @@ const Home = ({ navigation }) => {
             <Text>Receive</Text>
           </View>
           <View style={styles.imageMainContainer}>
-            <View style={styles.imageContainer}>
+            <View style={[styles.imageContainer]}>
               <Image
                 style={styles.transferIcon}
                 source={require("../assets/dollar.png")}
@@ -85,7 +72,7 @@ const Home = ({ navigation }) => {
             <Text>Loan</Text>
           </View>
           <View style={styles.imageMainContainer}>
-            <View style={styles.imageContainer}>
+            <View style={[styles.imageContainer]}>
               <Image
                 style={styles.transferIcon}
                 source={require("../assets/topCloud.png")}
@@ -98,7 +85,7 @@ const Home = ({ navigation }) => {
         {/* Transaction */}
         <View style={styles.transaction}>
           <View style={styles.transactionHeader}>
-            <Text style={styles.transactionText}>Transaction</Text>
+            <Text style={[styles.transactionText]}>Transaction</Text>
             <Text style={styles.seeAll}>See All</Text>
           </View>
           <View style={styles.flatlistContainer}>
@@ -113,17 +100,15 @@ const Home = ({ navigation }) => {
                       source={item.image}
                     />
                     <View style={styles.transactionCardText}>
-                      <Text style={styles.transactionCardTextName}>
+                      <Text style={[styles.transactionCardTextName]}>
                         {item.name}
                       </Text>
-                      <Text style={styles.transactionCardTextIndustry}>
+                      <Text style={[styles.transactionCardTextIndustry]}>
                         {item.industry}
                       </Text>
                     </View>
                   </View>
-                  <View>
-                    <Text>{item.amount}</Text>
-                  </View>
+                  <Text>{item.amount}</Text>
                 </View>
               )}
               Vertical
@@ -134,9 +119,32 @@ const Home = ({ navigation }) => {
         </View>
 
         {/* BottomNavigation */}
-
-        {/* </View> */}
-        <Text onPress={() => navigation.navigate("Settings")}>Settings</Text>
+        <View style={styles.bottomNavigation}>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Image
+              style={[styles.home]}
+              source={require("../assets/homeActive.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Image
+              style={[styles.homeIcon]}
+              source={require("../assets/myCards.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Image
+              style={[styles.homeIcon]}
+              source={require("../assets/pie.png")}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+            <Image
+              style={[styles.homeIcon]}
+              source={require("../assets/settings.png")}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -153,7 +161,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "start",
     height: "100%",
-    gap: 20,
+    gap: 15,
   },
   profile: {
     flexDirection: "row",
@@ -199,15 +207,12 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   imageContainer: {
-    backgroundColor: "#EBEBEF",
     padding: 15,
     borderRadius: 30,
   },
-
   transferIcon: {
     width: 30,
     height: 30,
-    padding: 10,
     borderRadius: 30,
     resizeMode: "contain",
   },
@@ -236,12 +241,10 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
-
   flatList: {
     width: 389,
     height: 300,
   },
-
   flatListChild: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -249,9 +252,9 @@ const styles = StyleSheet.create({
     gap: 20,
     flex: 1,
     padding: 10,
+    marginTop: 20,
     marginBottom: 20,
   },
-
   transactionCard: {
     flexDirection: "row",
     alignItems: "center",
@@ -268,5 +271,23 @@ const styles = StyleSheet.create({
   transactionCardTextIndustry: {
     fontSize: 12,
     fontWeight: "400",
+  },
+  homeIcon: {
+    height: 25,
+    width: 25,
+    resizeMode: "contain",
+  },
+  bottomNavigation: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    padding: 20,
+    bottom: 10,
+  },
+  home: {
+    height: 30,
+    width: 30,
+    resizeMode: "contain",
   },
 });

@@ -1,29 +1,46 @@
-import { NavigationContainer } from "@react-navigation/native";
-import StackNavigator from "./Components/StackNavigator";
-import { StyleSheet, useColorScheme } from "react-native";
 import React from "react";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
+import StackNavigator from "./Components/StackNavigator";
+import { ThemeProvider, useTheme } from "./Context/ThemeContext";
 
-export default function App() {
-  const scheme = useColorScheme();
-  const styles = scheme === "dark" ? darkStyles : lightStyles;
+const App = () => {
+  return (
+    <ThemeProvider>
+      <MainApp />
+    </ThemeProvider>
+  );
+};
 
+const MainApp = () => {
+  const { isDark } = useTheme();
+
+  const lightTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: "#fff",
+      text: "#000",
+    },
+  };
+
+  const darkTheme = {
+    ...DarkTheme,
+    colors: {
+      ...DarkTheme.colors,
+      background: "#000",
+      text: "#fff",
+    },
+  };
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={isDark ? darkTheme : lightTheme}>
       <StackNavigator />
     </NavigationContainer>
   );
-}
-const lightStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
+};
 
-const darkStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000",
-  },
-});
+export default App;
