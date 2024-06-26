@@ -1,8 +1,24 @@
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import React from "react";
-
+import {
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  Switch,
+  Text,
+  View,
+  Image,
+  useColorScheme,
+} from "react-native";
+import React, { useState } from "react";
+import Toggle from "../Components/Toggle";
 
 const Settings = ({ navigation }) => {
+  const scheme = useColorScheme();
+  const styles = scheme === "dark" ? darkStyles : lightStyles;
+
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  const [isEnabled, setIsEnabled] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.subContainer}>
@@ -13,35 +29,48 @@ const Settings = ({ navigation }) => {
         <View style={styles.settingsListContainer}>
           <View style={styles.settingsList}>
             <Text style={styles.text1}>Language</Text>
-            <Text>Profile</Text>
+            <Image
+              style={styles.settingsIcon}
+              source={require("../assets/icons8-right-arrow-100.png")}
+            />
           </View>
           <View style={styles.settingsList}>
             <Text style={styles.text1}>My Profile</Text>
-            <Text>Profile</Text>
+            <Image
+              style={styles.settingsIcon}
+              source={require("../assets/icons8-right-arrow-100.png")}
+            />
           </View>
           <View style={styles.settingsList}>
             <Text style={styles.text1}>Contact Us</Text>
-            <Text>Profile</Text>
+            <Image
+              style={styles.settingsIcon}
+              source={require("../assets/icons8-right-arrow-100.png")}
+            />
           </View>
           <View style={styles.settingsList}>
             <Text style={styles.text1}>Change Password</Text>
-            <Text>Profile</Text>
+            <Image
+              style={styles.settingsIcon}
+              source={require("../assets/icons8-right-arrow-100.png")}
+            />
           </View>
           <View style={styles.settingsList}>
             <Text style={styles.text1}>Privacy Policy</Text>
-            <Text>Profile</Text>
+            <Image
+              style={styles.settingsIcon}
+              source={require("../assets/icons8-right-arrow-100.png")}
+            />
           </View>
 
-
-          <View>
-            
-            <Text>Theme</Text>
-
+          <View style={styles.settingsTheme}>
+            <Text style={styles.text1}>Theme</Text>
+            <Toggle />
           </View>
         </View>
 
         {/* Bottom Navigation */}
-     
+        <Text onPress={() => navigation.navigate("Home")}>Home</Text>
       </View>
     </SafeAreaView>
   );
@@ -49,7 +78,7 @@ const Settings = ({ navigation }) => {
 
 export default Settings;
 
-const styles = StyleSheet.create({
+const lightStyles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -93,5 +122,16 @@ const styles = StyleSheet.create({
   bottomText: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  settingsTheme: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    padding: 10,
+  },
+  settingsIcon: {
+    width: 20,
+    height: 20,
   },
 });

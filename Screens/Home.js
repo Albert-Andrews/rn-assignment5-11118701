@@ -8,11 +8,8 @@ import {
 } from "react-native";
 import React from "react";
 import { Transaction } from "../Mock/Transaction";
-import TabNavigation from "../Components/TabNavigation";
 
-
-
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.subContainer}>
@@ -82,7 +79,7 @@ const Home = () => {
             <View style={styles.imageContainer}>
               <Image
                 style={styles.transferIcon}
-                source={require("../assets/loan.png")}
+                source={require("../assets/dollar.png")}
               />
             </View>
             <Text>Loan</Text>
@@ -91,7 +88,7 @@ const Home = () => {
             <View style={styles.imageContainer}>
               <Image
                 style={styles.transferIcon}
-                source={require("../assets/topUp.png")}
+                source={require("../assets/topCloud.png")}
               />
             </View>
             <Text>TopUp</Text>
@@ -116,8 +113,12 @@ const Home = () => {
                       source={item.image}
                     />
                     <View style={styles.transactionCardText}>
-                      <Text>{item.name}</Text>
-                      <Text>{item.industry}</Text>
+                      <Text style={styles.transactionCardTextName}>
+                        {item.name}
+                      </Text>
+                      <Text style={styles.transactionCardTextIndustry}>
+                        {item.industry}
+                      </Text>
                     </View>
                   </View>
                   <View>
@@ -135,8 +136,7 @@ const Home = () => {
         {/* BottomNavigation */}
 
         {/* </View> */}
-
-        <TabNavigation />
+        <Text onPress={() => navigation.navigate("Settings")}>Settings</Text>
       </View>
     </SafeAreaView>
   );
@@ -175,8 +175,14 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 5,
   },
-  greeting: {},
-  name: {},
+  greeting: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: "400",
+  },
   search: {},
   searchIcon: {
     width: 30,
@@ -254,5 +260,13 @@ const styles = StyleSheet.create({
   transactionCardText: {
     flexDirection: "column",
     gap: 5,
+  },
+  transactionCardTextName: {
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  transactionCardTextIndustry: {
+    fontSize: 12,
+    fontWeight: "400",
   },
 });
