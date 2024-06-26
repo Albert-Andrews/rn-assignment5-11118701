@@ -11,6 +11,10 @@ Added a feature to switch between light and dark themes.
 Styled the application to closely match the provided UI design.
 Utilized custom components throughout the application for better code reusability and readability.
 Screenshots
+![alt text](<Screenshot 2024-06-26 at 10.28.23 PM.png>)
+![alt text](<Screenshot 2024-06-26 at 10.28.35 PM.png>)
+![alt text](<Screenshot 2024-06-26 at 10.43.45 PM.png>)
+![alt text](<Screenshot 2024-06-26 at 10.43.55 PM.png>)
 
 How to Run the Application
 Clone the repository:
