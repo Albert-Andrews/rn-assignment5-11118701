@@ -1,5 +1,5 @@
-import up from "../assets/send.png";
-import down from "../assets/recieve.png";
+import up from "../assets/up.png";
+import down from "../assets/down.png";
 import dollar from "../assets/loan.png";
 import cloud from "../assets/topUp.png";
 

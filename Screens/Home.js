@@ -7,7 +7,10 @@ import {
   FlatList,
 } from "react-native";
 import React from "react";
-// import { Transfer } from "../Mock/TransferOptions";
+import { Transaction } from "../Mock/Transaction";
+import TabNavigation from "../Components/TabNavigation";
+
+
 
 const Home = () => {
   return (
@@ -29,7 +32,7 @@ const Home = () => {
           <View style={styles.search}>
             <Image
               style={styles.searchIcon}
-              source={require("../assets/search.png")}
+              source={require("../assets/icons8-search-480.png")}
             />
           </View>
         </View>
@@ -60,22 +63,22 @@ const Home = () => {
             <View style={styles.imageContainer}>
               <Image
                 style={styles.transferIcon}
-                source={require("../assets/send.png")}
+                source={require("../assets/up.png")}
               />
             </View>
             <Text>Sent</Text>
           </View>
 
-          <View>
+          <View style={styles.imageMainContainer}>
             <View style={styles.imageContainer}>
               <Image
                 style={styles.transferIcon}
-                source={require("../assets/recieve.png")}
+                source={require("../assets/down.png")}
               />
             </View>
             <Text>Receive</Text>
           </View>
-          <View>
+          <View style={styles.imageMainContainer}>
             <View style={styles.imageContainer}>
               <Image
                 style={styles.transferIcon}
@@ -84,7 +87,7 @@ const Home = () => {
             </View>
             <Text>Loan</Text>
           </View>
-          <View>
+          <View style={styles.imageMainContainer}>
             <View style={styles.imageContainer}>
               <Image
                 style={styles.transferIcon}
@@ -96,9 +99,44 @@ const Home = () => {
         </View>
 
         {/* Transaction */}
-        <View>
-          <FlatList />
+        <View style={styles.transaction}>
+          <View style={styles.transactionHeader}>
+            <Text style={styles.transactionText}>Transaction</Text>
+            <Text style={styles.seeAll}>See All</Text>
+          </View>
+          <View style={styles.flatlistContainer}>
+            <FlatList
+              style={styles.flatList}
+              data={Transaction}
+              renderItem={({ item }) => (
+                <View style={styles.flatListChild}>
+                  <View style={styles.transactionCard}>
+                    <Image
+                      style={styles.transactionCardImage}
+                      source={item.image}
+                    />
+                    <View style={styles.transactionCardText}>
+                      <Text>{item.name}</Text>
+                      <Text>{item.industry}</Text>
+                    </View>
+                  </View>
+                  <View>
+                    <Text>{item.amount}</Text>
+                  </View>
+                </View>
+              )}
+              Vertical
+              showsVerticalScrollIndicator={false}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
         </View>
+
+        {/* BottomNavigation */}
+
+        {/* </View> */}
+
+        <TabNavigation />
       </View>
     </SafeAreaView>
   );
@@ -112,9 +150,10 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     padding: 20,
-    justifyContent: "start",
+    justifyContent: "space-between",
     alignItems: "start",
-    gap: 30,
+    height: "100%",
+    gap: 20,
   },
   profile: {
     flexDirection: "row",
@@ -143,14 +182,6 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  //   card: {
-  //     width: "100%",
-  //     height: 250,
-  //     borderRadius: 10,
-  //     justifyContent: "center",
-  //     alignItems: "center",
-  //     backgroundColor: "red",
-  //   },
   cardImage: {
     height: 230,
     width: "100%",
@@ -179,17 +210,49 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
   },
+  transactionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  transaction: {
+    marginTop: 10,
+  },
+  transactionText: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  seeAll: {
+    fontSize: 15,
+    color: "blue",
+  },
+  transactionCardImage: {
+    width: 40,
+    height: 40,
+  },
 
-  //   flatList: {
-  //     backgroundColor: "red",
-  // },
-  //   flatListChild: {
-  //     backgroundColor: "green",
-  //     width:"110%",
-  //     height: 50,
-  //     borderRadius: 10,
-  //     justifyContent: "center",
-  //     alignItems: "center",
-  //     gap: 10,
-  //   },
+  flatList: {
+    width: 389,
+    height: 300,
+  },
+
+  flatListChild: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 20,
+    flex: 1,
+    padding: 10,
+    marginBottom: 20,
+  },
+
+  transactionCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  transactionCardText: {
+    flexDirection: "column",
+    gap: 5,
+  },
 });
